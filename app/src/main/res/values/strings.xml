@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">Chalk_talk</string>
+    <string name="title_activity_home_activity">Home_activity</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+    <string name="title_activity_tutor_home_page">Tutor_home_page</string>
+</resources>
