@@ -19,8 +19,6 @@ public class tutor_create_account extends AppCompatActivity {
         setContentView(R.layout.activity_tutor_create_account);
         name = findViewById(R.id.name);
         dob = findViewById(R.id.dob);
-        age = findViewById(R.id.age);
-        specification = findViewById(R.id.specification);
         address = findViewById(R.id.address);
         gender = findViewById(R.id.gender_btn);
         emailId = findViewById(R.id.email_addr);

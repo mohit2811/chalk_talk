@@ -1,18 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
     xmlns:android="http://schemas.android.com/apk/res/android">
-    <item
-        android:title="Add Course"
-        android:id="@+id/add_course"
-        android:icon="@drawable/ic_addcourse"
-
-        />
-    <item
-        android:title="Courses"
-        android:icon="@drawable/all_courses"
-        android:id="@+id/all_courses"
-        />
     <item android:id="@+id/search"
+        android:title="search_title"
         android:icon="@drawable/ic_search"
         android:showAsAction="collapseActionView|ifRoom"
         android:actionViewClass="android.widget.SearchView" />

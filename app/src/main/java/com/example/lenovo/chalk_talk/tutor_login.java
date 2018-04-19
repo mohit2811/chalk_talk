@@ -52,7 +52,7 @@ public class tutor_login extends AppCompatActivity {
         final ProgressDialog progress_bar = new ProgressDialog(tutor_login.this);
 
         progress_bar.setTitle("please wait");
-        progress_bar.setMessage("Create account");
+        progress_bar.setMessage("logging in");
 
         progress_bar.show();
 
@@ -74,7 +74,7 @@ public class tutor_login extends AppCompatActivity {
             }
         };
 
-        f_auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(listener);
+        f_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(listener);
     }
 
     public void create_account(View view) {

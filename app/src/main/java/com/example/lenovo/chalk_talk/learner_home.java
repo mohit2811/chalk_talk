@@ -1,17 +1,17 @@
 package com.example.lenovo.chalk_talk;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.TextView;
-import android.widget.Toast;
 
-public class Home_activity extends AppCompatActivity {
+public class learner_home extends AppCompatActivity {
 
+    private TextView mTextMessage;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -19,13 +19,20 @@ public class Home_activity extends AppCompatActivity {
         @Override
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
-                case R.id.add_course:
-                    Toast.makeText(Home_activity.this,"add course",Toast.LENGTH_SHORT).show();
-                    return true;
                 case R.id.all_courses:
-                    Toast.makeText(Home_activity.this,"All courses",Toast.LENGTH_SHORT).show();
-                    return true;
+                    FragmentManager manager = getSupportFragmentManager();
 
+                    FragmentTransaction transaction = manager.beginTransaction();
+
+                    Course_learner learner = new Course_learner();
+
+                    transaction.replace(R.id.main_frame,learner);
+
+                    transaction.commit();
+                    return true;
+                case R.id.course_opt:
+                    mTextMessage.setText(R.string.title_dashboard);
+                    return true;
             }
             return false;
         }
@@ -34,19 +41,11 @@ public class Home_activity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_home_activity);
+        setContentView(R.layout.activity_learner_home);
 
-
+        mTextMessage = (TextView) findViewById(R.id.message);
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
-    public void home(View view) {
-        Intent i = new Intent(Home_activity.this,Home_activity.class);
-        startActivity(i);
-    }
-
-    public void user_profile(View view) {
-
-    }
 }

@@ -1,11 +1,11 @@
-package com.example.lenovo.chalk_talk;
+package com.example.lenovo.chalk_talk.dataModel;
 
 /**
  * Created by lenovo on 03-Apr-18.
  */
 
 public class createaccount {
-    public String name,dob,age,qualification,address, gender,email_address,password, confirm_password;
+    public String name,dob,qualification,address, gender,email_address,password, confirm_password;
 
 
     createaccount()
@@ -14,12 +14,11 @@ public class createaccount {
     }
 
 
-    createaccount(String name , String dob, String age, String qualification, String address, String gender, String email_address, String password, String confirm_password)
+    public createaccount(String name, String dob, String qualification, String address, String gender, String email_address, String password, String confirm_password)
 
     {
         this.name = name;
         this.dob = dob;
-        this.age = age;
         this.address= address;
         this.qualification= qualification;
         this.gender = gender;

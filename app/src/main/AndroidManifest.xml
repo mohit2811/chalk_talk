@@ -11,7 +11,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Learner_home_page">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -21,14 +21,22 @@
         <activity android:name=".learner_login" />
         <activity android:name=".tutor_login" />
         <activity android:name=".Create_account" />
-        <activity
-            android:name=".Home_activity"
-            android:label="@string/title_activity_home_activity" />
         <activity android:name=".tutor_create_account" />
         <activity android:name=".User_profile" />
         <activity
             android:name=".Tutor_home_page"
-            android:label="@string/title_activity_tutor_home_page"></activity>
+            android:label="@string/title_activity_tutor_home_page" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/title_activity_learner_home_page" />
+        <activity android:name=".feedback" />
+        <activity android:name=".settings" />
+        <activity android:name=".Tutor_profile" />
+        <activity android:name=".tutor_setting" />
+        <activity android:name=".learner_profile" />
+        <activity
+            android:name=".learner_home"
+            android:label="@string/title_activity_learner_home"></activity>
     </application>
 
 </manifest>

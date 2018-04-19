@@ -23,7 +23,7 @@ public class learner_login extends AppCompatActivity {
         setContentView(R.layout.activity_learner_login);
     }
 
-    public void sign_up_learner(View view) {
+    public void sign_in_learner(View view) {
         EditText email_et = findViewById(R.id.email1);
 
         EditText password_et = findViewById(R.id.password1);
@@ -66,7 +66,7 @@ public class learner_login extends AppCompatActivity {
             }
         };
 
-        f_auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(listener);
+        f_auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(listener);
     }
 
     public void create_account(View view) {

@@ -7,12 +7,13 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 
+import com.example.lenovo.chalk_talk.dataModel.createaccount;
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Create_account extends AppCompatActivity {
-    EditText name, dob, age, qualification, address, emailId, password, confirmPassword;
+    EditText name, dob , qualification, address, emailId, password, confirmPassword;
     RadioGroup gender;
-    String names, dobs, ages, qualifications, saddress, genders, emailIds, passwords, confirmPasswords;
+    String names, dobs, qualifications, saddress, genders, emailIds, passwords, confirmPasswords;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +21,6 @@ public class Create_account extends AppCompatActivity {
         setContentView(R.layout.activity_learner_create_account);
         name = findViewById(R.id.name);
         dob = findViewById(R.id.dob);
-        age = findViewById(R.id.age);
         qualification = findViewById(R.id.qualification);
         address = findViewById(R.id.address);
         gender = findViewById(R.id.gender_btn);
@@ -32,10 +32,10 @@ public class Create_account extends AppCompatActivity {
 
     public void register(View view) {
 
-        Intent i = new Intent(Create_account.this, Home_activity.class);
+        Intent i = new Intent(Create_account.this, Learner_home_page.class);
         startActivity(i);
 
-        createaccount data = new createaccount(names, dobs, ages, qualifications, saddress, genders, emailIds, passwords, confirmPasswords);
+        createaccount data = new createaccount(names, dobs, qualifications, saddress, genders, emailIds, passwords, confirmPasswords);
 
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
