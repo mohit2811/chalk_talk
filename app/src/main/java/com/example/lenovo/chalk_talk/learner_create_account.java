@@ -21,22 +21,23 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.internal.FirebaseAppHelper;
 
-public class tutor_create_account extends AppCompatActivity {
+public class learner_create_account extends AppCompatActivity {
     EditText name, dob , qualification, address, emailId, password, confirmPassword;
     RadioGroup gender;
+    RadioButton male,female,other;
     String names, dobs, qualifications, saddress, genders, emailIds, passwords, confirmPasswords;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tutor_create_account);
-        name = findViewById(R.id.name_et);
-        dob = findViewById(R.id.dob_et);
-        qualification = findViewById(R.id.Qualification_et);
-        address = findViewById(R.id.Address_et);
+        setContentView(R.layout.activity_learner_create_account);
+        name = findViewById(R.id.learner_name_et);
+        dob = findViewById(R.id.learner_dob_et);
+        qualification = findViewById(R.id.learner_Qualification_et);
+        address = findViewById(R.id.learner_Address_et);
         gender = findViewById(R.id.gender_btn);
-        emailId = findViewById(R.id.email_et);
-        password = findViewById(R.id.password_et);
-        confirmPassword = findViewById(R.id.cpassword_et);
+        emailId = findViewById(R.id.learner_email_et);
+        password = findViewById(R.id.learner_password_et);
+        confirmPassword = findViewById(R.id.learner_cpassword_et);
 
         names = name.getText().toString();
         dobs = dob.getText().toString();
@@ -49,7 +50,7 @@ public class tutor_create_account extends AppCompatActivity {
 
     }
 
-    public void register_tutor(View view) {
+    public void register(View view) {
 
         createaccount data = new createaccount(names, dobs, qualifications, saddress, genders);
         FirebaseDatabase database = FirebaseDatabase.getInstance();
@@ -57,7 +58,7 @@ public class tutor_create_account extends AppCompatActivity {
         if (Patterns.EMAIL_ADDRESS.matcher(emailIds).matches()) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "invalid email", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "invalid email", Toast.LENGTH_SHORT).show();
             return;
         }
 
@@ -65,48 +66,48 @@ public class tutor_create_account extends AppCompatActivity {
         if (passwords.length() >= 8 && passwords.length() < 33) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "password must be between 8-33 character", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "password must be between 8-33 character", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (saddress.length() >= 5) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "Enter address", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "Enter address", Toast.LENGTH_SHORT).show();
             return;
         }
         if (names.length() >= 5) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "Enter name", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "Enter name", Toast.LENGTH_SHORT).show();
             return;
         }
         if (dobs.length() >= 2) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "Enter dob", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "Enter dob", Toast.LENGTH_SHORT).show();
             return;
         }
         if (qualifications.length() >= 5) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "Enter qualification", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "Enter qualification", Toast.LENGTH_SHORT).show();
             return;
         }
         if (confirmPasswords.equals(passwords)) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "confirm password", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "confirm password", Toast.LENGTH_SHORT).show();
             return;
         }
         if (genders.length() >= 5) {
 
         } else {
-            Toast.makeText(tutor_create_account.this, "select gender", Toast.LENGTH_SHORT).show();
+            Toast.makeText(learner_create_account.this, "select gender", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        final ProgressDialog progress_bar = new ProgressDialog(tutor_create_account.this);
+        final ProgressDialog progress_bar = new ProgressDialog(learner_create_account.this);
         progress_bar.setTitle("please wait");
         progress_bar.setMessage("Create account");
         progress_bar.show();
@@ -119,17 +120,17 @@ public class tutor_create_account extends AppCompatActivity {
                 progress_bar.hide();
 
                 if (task.isSuccessful()) {
-                    Toast.makeText(tutor_create_account.this, "done", Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(tutor_create_account.this, Tutor_home_page.class);
+                    Toast.makeText(learner_create_account.this, "done", Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(learner_create_account.this, learner_home.class);
                     startActivity(i);
                 } else {
-                    Toast.makeText(tutor_create_account.this, "error try again", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(learner_create_account.this, "error try again", Toast.LENGTH_SHORT).show();
                 }
             }
         };
 
         f_auth.createUserWithEmailAndPassword(emailIds, passwords).addOnCompleteListener(listener);
-        database.getReference().child("Tutor").child(emailIds).setValue(data);
+        database.getReference().child("learner").child(emailIds).setValue(data);
 
     }
 }

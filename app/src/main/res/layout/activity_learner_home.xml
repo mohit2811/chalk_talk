@@ -6,7 +6,7 @@
         android:id="@+id/container1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="com.example.lenovo.chalk_talk.Learner_home_page">
+        tools:context="com.example.lenovo.chalk_talk.learner_home">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -34,7 +34,8 @@
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_menu"
                 android:layout_margin="10dp"
-                android:id="@+id/menu"/>
+                android:id="@+id/menu"
+                android:onClick="drawer"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -64,6 +65,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:background="#fff"
+            android:id="@+id/learner_drawer"
             android:layout_gravity="left">
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -81,6 +83,7 @@
                     android:layout_height="wrap_content"
                     android:hint="anmol@gmail.com"
                     android:textSize="20dp"
+                    android:onClick="user_profile"
                     android:layout_below="@id/home_profile"
                     android:layout_marginTop="10dp"
                     android:layout_marginLeft="10dp"
@@ -108,25 +111,7 @@
                     android:onClick="home"/>
 
             </LinearLayout>
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:padding="10dp">
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_user_profile"/>
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Profile"
-                    android:textSize="20dp"
-                    android:layout_marginLeft="10dp"
-                    android:textColor="#000"
-                    android:id="@+id/user"/>
 
-            </LinearLayout>
 
             <View
                 android:layout_width="match_parent"

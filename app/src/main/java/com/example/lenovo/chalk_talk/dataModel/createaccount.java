@@ -5,16 +5,14 @@ package com.example.lenovo.chalk_talk.dataModel;
  */
 
 public class createaccount {
-    public String name,dob,qualification,address, gender,email_address,password, confirm_password;
-
+    public String name,dob,qualification,address, gender;
 
     createaccount()
     {
 
     }
 
-
-    public createaccount(String name, String dob, String qualification, String address, String gender, String email_address, String password, String confirm_password)
+    public createaccount(String name, String dob, String qualification, String address, String gender)
 
     {
         this.name = name;
@@ -22,8 +20,5 @@ public class createaccount {
         this.address= address;
         this.qualification= qualification;
         this.gender = gender;
-        this.email_address= email_address;
-        this.password= password;
-        this.confirm_password= confirm_password;
     }
 }

@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/signup2"
+        android:orientation="vertical"
+        android:padding="10dp"
+        tools:context="com.example.lenovo.chalk_talk.add_course">
+
+        <TextView
+            android:id="@+id/add"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_margin="10dp"
+            android:shadowColor="@color/colorPrimary"
+            android:text="ADD COURSE"
+            android:textColor="#000"
+            android:textSize="35dp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/course_name_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+
+            android:background="@drawable/rounded_stroke"
+            android:hint="Enter Course Name"
+            android:padding="10dp"
+            android:layout_margin="10dp"
+            android:textColor="#222 "
+            android:textColorHint="#000"
+            android:textSize="15sp" />
+
+
+        <EditText
+            android:id="@+id/course_id_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+            android:background="@drawable/rounded_stroke"
+            android:hint="Enter course id"
+            android:padding="10dp"
+            android:textColor="#222 "
+            android:textColorHint="#000"
+            android:textSize="15sp" />
+
+        <EditText
+            android:id="@+id/course_duration_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/rounded_stroke"
+            android:hint="Enter Course Duration"
+            android:padding="10dp"
+            android:textColor="#222 "
+            android:textColorHint="#000"
+            android:textSize="15sp" />
+
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal">
+        <TextView
+            android:id="@+id/tutor_name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+
+            android:layout_margin="10dp"
+            android:text="Tutor Name :"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/name_txt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+            android:text="name"
+            android:textColor="#000"
+            android:textSize="18dp"
+            android:textStyle="bold" />
+       </LinearLayout>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+            android:layout_marginTop="30sp"
+            android:padding="10dp"
+            android:background="#080e51"
+            android:onClick="add"
+            android:text="Add Course"
+            android:textColor="#fff" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="30sp"
+        android:padding="10dp"
+        android:background="#080e51"
+        android:onClick="add_vid"
+        android:text="Add video"
+        android:textColor="#fff" />
+    </LinearLayout>

@@ -11,13 +11,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Learner_home_page">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".learner_login" />
         <activity android:name=".tutor_login" />
         <activity android:name=".Create_account" />
@@ -36,7 +29,16 @@
         <activity android:name=".learner_profile" />
         <activity
             android:name=".learner_home"
-            android:label="@string/title_activity_learner_home"></activity>
+            android:label="@string/title_activity_learner_home" />
+        <activity android:name=".firstpage" />
+        <activity android:name=".course_opt" />
+        <activity android:name=".course_lists" />
+        <activity android:name=".course_detail" />
+        <activity android:name=".tutor_course" />
+        <activity android:name=".tutor_course_details" />
+        <activity android:name=".add_course" />
+        <activity android:name=".course_vidd" />
+        <activity android:name=".book_course"></activity>
     </application>
 
 </manifest>
