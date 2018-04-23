@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/signup"
     xmlns:android="http://schemas.android.com/apk/res/android">
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
     android:layout_height="match_parent"
    android:orientation="vertical"
+    android:padding="10dp"
     >
 
     <android.support.v7.widget.CardView
@@ -17,42 +19,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/course1"
-        android:orientation="vertical"
+        android:id="@+id/dance_course"
         android:gravity="center"
-        android:padding="5dp"
-        >
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="100dp"
-            android:id="@+id/cs1"
-            android:src="@drawable/cs_icon"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#000"
-            android:text="Computer Science"
-            android:textSize="20dp"
-
-            android:id="@+id/cs"
-            android:layout_marginTop="20dp"/>
-
-
-    </LinearLayout>
-
-    </android.support.v7.widget.CardView>
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/course2"
+        android:onClick="dance_course"
+        android:background="@drawable/signup2"
+        android:layout_gravity="center"
         android:layout_below="@+id/course1"
         android:orientation="vertical"
-        android:layout_margin="30dp">
+>
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="100dp"
-
             android:src="@drawable/dance_icon"/>
         <TextView
             android:layout_width="wrap_content"
@@ -60,21 +37,27 @@
             android:textColor="#000"
             android:text="Dance"
             android:textSize="20dp"
-            android:layout_marginLeft="100dp"
+            android:layout_gravity="center"
             android:layout_marginTop="25dp"/>
 
     </LinearLayout>
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="1dp"
-        android:background="#000"/>
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        >
+
 
     <LinearLayout
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/course3"
+        android:id="@+id/tech_course"
+        android:background="@drawable/signup2"
+        android:layout_gravity="center"
+        android:gravity="center"
         android:orientation="vertical"
-        android:layout_margin="30dp"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -88,19 +71,58 @@
             android:text="Information Tecnology"
             android:textSize="20dp"
             android:id="@+id/it1"
+            android:layout_gravity="center"
             android:layout_marginTop="25dp"/>
 
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"/>
+    </android.support.v7.widget.CardView>
 
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_margin="5dp"
+        android:layout_height="wrap_content"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/computer_course"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@drawable/signup2"
+            android:padding="5dp"
+            >
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="100dp"
+                android:id="@+id/cs1"
+                android:src="@drawable/cs_icon"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="#000"
+                android:text="Computer Science"
+                android:textSize="20dp"
+
+                android:id="@+id/cs"
+                android:layout_marginTop="20dp"/>
+
+
+        </LinearLayout>
+
+    </android.support.v7.widget.CardView>
+
+    <android.support.v7.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        >
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_margin="30dp"
+        android:id="@+id/music_course"
+        android:background="@drawable/signup2"
+        android:layout_gravity="center"
         >
         <ImageView
             android:layout_width="wrap_content"
@@ -116,12 +138,7 @@
             android:layout_marginLeft="28dp"
             android:id="@+id/dance1"
             android:layout_marginTop="25dp"/>
-
     </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000"/>
-
+    </android.support.v7.widget.CardView>
 </LinearLayout>
 </ScrollView>

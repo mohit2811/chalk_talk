@@ -70,7 +70,7 @@ public class learner_login extends AppCompatActivity {
     }
 
     public void create_account(View view) {
-        Intent i = new Intent(learner_login.this, Create_account.class);
+        Intent i = new Intent(learner_login.this, learner_create_account.class);
         startActivity(i);
     }
 }

@@ -11,6 +11,26 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CHALK TALK"
+            android:textSize="30dp"
+            android:textColor="#000"
+            android:textStyle="bold|italic"
+            android:layout_toRightOf="@id/menu"
+            android:layout_marginLeft="60dp"
+            android:layout_marginTop="8dp"
+            android:id="@+id/title_home"/>
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_search"
+            android:layout_toRightOf="@id/title_home"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="50dp"
+            android:id="@+id/search_lerner"/>
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/navigation"
         android:layout_width="match_parent"
@@ -22,7 +42,8 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/navigation">
+        android:layout_above="@+id/navigation"
+        android:layout_below="@+id/title_home ">
     </FrameLayout>
 
         <ImageView

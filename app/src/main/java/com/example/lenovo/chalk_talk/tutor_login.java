@@ -24,9 +24,9 @@ public class tutor_login extends AppCompatActivity {
     }
 
     public void sign_up_tutor(View view) {
-        EditText email_et = findViewById(R.id.email1);
+        EditText email_et = findViewById(R.id.emailt);
 
-        EditText password_et = findViewById(R.id.password1);
+        EditText password_et = findViewById(R.id.passwordt);
 
         String email= email_et.getText().toString();
 
@@ -78,7 +78,7 @@ public class tutor_login extends AppCompatActivity {
     }
 
     public void create_account(View view) {
-        Intent i = new Intent(tutor_login.this,Create_account.class);
+        Intent i = new Intent(tutor_login.this,tutor_create_account.class);
         startActivity(i);
 
     }
