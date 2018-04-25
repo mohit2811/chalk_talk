@@ -9,7 +9,7 @@
         />
     <item
         android:title="Courses"
-        android:icon="@drawable/all_courses"
-        android:id="@+id/all_courses"
+        android:icon="@drawable/allcourse"
+        android:id="@+id/all_courses_tutor"
         />
 </menu>

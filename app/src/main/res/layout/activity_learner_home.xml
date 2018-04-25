@@ -3,7 +3,7 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/container1"
+        android:id="@+id/learner_home"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context="com.example.lenovo.chalk_talk.learner_home">
@@ -19,7 +19,7 @@
                 android:layout_marginStart="0dp"
                 android:background="?android:attr/windowBackground"
                 android:layout_alignParentBottom="true"
-                app:menu="@menu/navigation" />
+                app:menu="@menu/navigation_learner" />
 
             <FrameLayout
                 android:layout_width="match_parent"

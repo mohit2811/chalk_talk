@@ -23,8 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class course_opt extends Fragment {
-    String course;
+public class course_opt extends android.support.v4.app.Fragment {
     ArrayList<course_details> course_list;
     RecyclerView course_recycler;
 
@@ -37,21 +36,21 @@ public class course_opt extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.fragment_course_learner, container, false);
-        course = getActivity().getIntent().getStringExtra("course");
+        View v = inflater.inflate(R.layout.activity_course_opt, container, false);
+
         course_list = new ArrayList<>();
         course_recycler = v.findViewById(R.id.learner_recycle);
         course_recycler.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.VERTICAL, false));
-        get_course_list(course);
+        get_course_list();
 return v;
     }
 
-    private void get_course_list(String course) {
+    private void get_course_list() {
         FirebaseAuth firebase = FirebaseAuth.getInstance();
         String email= firebase.getCurrentUser().getEmail().replace(".","");
         FirebaseDatabase data = FirebaseDatabase.getInstance();
         System.out.println("rrrr");
-        data.getReference().child(email).child(course).addListenerForSingleValueEvent(new ValueEventListener() {
+        data.getReference().child(email).child("course").addListenerForSingleValueEvent(new ValueEventListener() {
 
 
                                                                              @Override
@@ -112,21 +111,6 @@ return v;
 
             final course_details data=course_list.get(position);
             holder.course_name.setText(data.course_name);
-            if (course.equals("computer")) {
-                holder.course_img.setImageDrawable(getResources().getDrawable(R.drawable.cs_icon));
-
-            } if(course.equals("dance")) {
-                holder.course_img.setImageDrawable(getResources().getDrawable(R.drawable.dance_icon));
-
-            }
-            if(course.equals("music")) {
-                holder.course_img.setImageDrawable(getResources().getDrawable(R.drawable.music_icon));
-
-            }
-            if(course.equals("tech")) {
-                holder.course_img.setImageDrawable(getResources().getDrawable(R.drawable.it_icon));
-
-            }
             holder.course_id.setText(data.course_id);
             holder.course_lay.setOnClickListener(new View.OnClickListener() {
                 @Override

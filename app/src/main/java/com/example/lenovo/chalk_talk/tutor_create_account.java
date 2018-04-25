@@ -38,6 +38,12 @@ public class tutor_create_account extends AppCompatActivity {
         password = findViewById(R.id.password_et);
         confirmPassword = findViewById(R.id.cpassword_et);
 
+
+
+    }
+
+    public void register_tutor(View view) {
+
         names = name.getText().toString();
         dobs = dob.getText().toString();
         qualifications = qualification.getText().toString();
@@ -47,12 +53,6 @@ public class tutor_create_account extends AppCompatActivity {
         passwords = password.getText().toString();
         confirmPasswords = confirmPassword.getText().toString();
 
-    }
-
-    public void register_tutor(View view) {
-
-        createaccount data = new createaccount(names, dobs, qualifications, saddress, genders);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         if (Patterns.EMAIL_ADDRESS.matcher(emailIds).matches()) {
 
@@ -119,17 +119,25 @@ public class tutor_create_account extends AppCompatActivity {
                 progress_bar.hide();
 
                 if (task.isSuccessful()) {
+
                     Toast.makeText(tutor_create_account.this, "done", Toast.LENGTH_SHORT).show();
+                    emailIds.replace(".","");
+                     createaccount data = new createaccount(names, dobs, qualifications, saddress, genders);
+                     FirebaseDatabase database = FirebaseDatabase.getInstance();
+                     String emaill=emailIds.replace(".","");
+                    database.getReference().child("Tutor").child(emaill).setValue(data);
                     Intent i = new Intent(tutor_create_account.this, Tutor_home_page.class);
                     startActivity(i);
+                    finish();
                 } else {
+                    System.out.print(task.getException());
                     Toast.makeText(tutor_create_account.this, "error try again", Toast.LENGTH_SHORT).show();
                 }
             }
         };
 
         f_auth.createUserWithEmailAndPassword(emailIds, passwords).addOnCompleteListener(listener);
-        database.getReference().child("Tutor").child(emailIds).setValue(data);
+
 
     }
 }

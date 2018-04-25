@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container1"
+    android:id="@+id/tutor_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.lenovo.chalk_talk.Tutor_home_page">
@@ -19,7 +19,7 @@
             android:textColor="#000"
             android:textStyle="bold|italic"
             android:layout_toRightOf="@id/menu"
-            android:layout_marginLeft="60dp"
+            android:layout_marginLeft="100dp"
             android:layout_marginTop="8dp"
             android:id="@+id/title_home"/>
 
@@ -43,13 +43,15 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_above="@+id/navigation"
-        android:layout_below="@+id/title_home ">
+        android:layout_below="@id/title_home"
+        android:id="@+id/main_frame">
     </FrameLayout>
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_menu"
+            android:onClick="drawer_tutor"
             android:layout_margin="10dp"/>
     </RelativeLayout>
 
@@ -129,32 +131,7 @@
             android:layout_height="1dp"
             android:background="#000"
             />
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="10dp">
-            <ImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:src="@drawable/ic_action_name"
-                android:id="@+id/setting"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="settings"
-                android:textSize="20dp"
-                android:layout_marginLeft="10dp"
-                android:textColor="#000"
-                android:id="@+id/settings"
-                android:onClick="tutor_settings"/>
-
-        </LinearLayout>
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#000"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -224,6 +201,7 @@
                 android:textSize="20dp"
                 android:layout_marginLeft="10dp"
                 android:textColor="#000"
+                android:onClick="logut_tutor"
                 android:id="@+id/logout"/>
         </LinearLayout>
 

@@ -24,7 +24,7 @@ import com.google.firebase.internal.FirebaseAppHelper;
 public class learner_create_account extends AppCompatActivity {
     EditText name, dob , qualification, address, emailId, password, confirmPassword;
     RadioGroup gender;
-    RadioButton male,female,other;
+    RadioButton male,female,others;
     String names, dobs, qualifications, saddress, genders, emailIds, passwords, confirmPasswords;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +39,12 @@ public class learner_create_account extends AppCompatActivity {
         password = findViewById(R.id.learner_password_et);
         confirmPassword = findViewById(R.id.learner_cpassword_et);
 
+
+
+    }
+
+    public void register(View view) {
+
         names = name.getText().toString();
         dobs = dob.getText().toString();
         qualifications = qualification.getText().toString();
@@ -47,13 +53,6 @@ public class learner_create_account extends AppCompatActivity {
         emailIds = emailId.getText().toString();
         passwords = password.getText().toString();
         confirmPasswords = confirmPassword.getText().toString();
-
-    }
-
-    public void register(View view) {
-
-        createaccount data = new createaccount(names, dobs, qualifications, saddress, genders);
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
 
         if (Patterns.EMAIL_ADDRESS.matcher(emailIds).matches()) {
 
@@ -100,7 +99,7 @@ public class learner_create_account extends AppCompatActivity {
             Toast.makeText(learner_create_account.this, "confirm password", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (genders.length() >= 5) {
+        if (genders.length() >=3 ) {
 
         } else {
             Toast.makeText(learner_create_account.this, "select gender", Toast.LENGTH_SHORT).show();
@@ -112,6 +111,7 @@ public class learner_create_account extends AppCompatActivity {
         progress_bar.setMessage("Create account");
         progress_bar.show();
 
+
         FirebaseAuth f_auth = FirebaseAuth.getInstance();
 
         OnCompleteListener<AuthResult> listener = new OnCompleteListener<AuthResult>() {
@@ -121,16 +121,22 @@ public class learner_create_account extends AppCompatActivity {
 
                 if (task.isSuccessful()) {
                     Toast.makeText(learner_create_account.this, "done", Toast.LENGTH_SHORT).show();
+                    createaccount data = new createaccount(names, dobs, qualifications, saddress,  genders);
+                    FirebaseDatabase database = FirebaseDatabase.getInstance();
+                    String emaill=emailIds.replace(".","");
+                    database.getReference().child("learner").child(emaill).setValue(data);
                     Intent i = new Intent(learner_create_account.this, learner_home.class);
                     startActivity(i);
+                    finish();
                 } else {
-                    Toast.makeText(learner_create_account.this, "error try again", Toast.LENGTH_SHORT).show();
+                        System.out.print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$"+task.getException());
+                    Toast.makeText(learner_create_account.this, "invalid account", Toast.LENGTH_SHORT).show();
                 }
             }
         };
 
         f_auth.createUserWithEmailAndPassword(emailIds, passwords).addOnCompleteListener(listener);
-        database.getReference().child("learner").child(emailIds).setValue(data);
+
 
     }
 }

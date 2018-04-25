@@ -36,9 +36,9 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/ic_action_name"
+        android:src="@drawable/lock"
         android:layout_below="@id/email_pic"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="16dp"
         android:id="@+id/lock_pic"/>
     <EditText
         android:layout_width="match_parent"
@@ -57,7 +57,7 @@
         android:layout_below="@+id/passwordt"
         android:layout_centerInParent="true"
         android:layout_marginTop="30dp"
-        android:padding="15dp"
+        android:padding="10dp"
         android:background="#1a2b8e"
         android:onClick="sign_up_tutor"
         android:id="@+id/sign_up"
@@ -81,8 +81,8 @@
         android:layout_below="@id/sign_up"
         android:layout_centerInParent="true"
         android:layout_marginTop="50dp"
-        android:padding="16dp"
+        android:padding="10dp"
         android:background="#050d45"
-        android:onClick="create_account"
+        android:onClick="create_account1"
         android:id="@+id/button2" />
 </RelativeLayout>

@@ -24,7 +24,7 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 
-public class tutor_course extends Fragment {
+public class tutor_course extends android.support.v4.app.Fragment {
 
     ArrayList<course_details> tutor_course_list;
     RecyclerView tutor_course_recycler;
@@ -35,66 +35,59 @@ public class tutor_course extends Fragment {
     }
 
 
-
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View v = inflater.inflate(R.layout.activity_tutor_course,container, false);
+        View v = inflater.inflate(R.layout.activity_tutor_course, container, false);
         View view = v;
-        Button add= view.findViewById(R.id.add_course);
-         add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i=new Intent(getActivity(),add_course.class);
-                startActivity(i);
-            }
-        });
+
         tutor_course_list = new ArrayList<>();
         tutor_course_recycler = v.findViewById(R.id.learner_recycle);
-        tutor_course_recycler.setLayoutManager(new LinearLayoutManager(getActivity() , LinearLayoutManager.VERTICAL, false));
-no=v.findViewById(R.id.nocourse);
-        get_course_list();
+        tutor_course_recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        no = v.findViewById(R.id.nocourse);
+       get_course_list();
         return v;
     }
 
     private void get_course_list() {
         FirebaseAuth firebase = FirebaseAuth.getInstance();
-        String email= firebase.getCurrentUser().getEmail().replace(".","");
+        String email = firebase.getCurrentUser().getEmail().replace(".", "");
         FirebaseDatabase data = FirebaseDatabase.getInstance();
         System.out.println("rrrr");
         data.getReference().child(email).addListenerForSingleValueEvent(new ValueEventListener() {
 
 
-                                                                                          @Override
-                                                                                          public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                              tutor_course_list.clear();
+                                                                            @Override
+                                                                            public void onDataChange(DataSnapshot dataSnapshot) {
+                                                                                tutor_course_list.clear();
 
 
-                                                                                              for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                                                                  course_details details = data.getValue(course_details.class);
-                                                                                                  System.out.println("rrrrrr");
-                                                                                                  tutor_course_list.add(details);
-                                                                                                  Adapter adapter = new Adapter();
-                                                                                                  no.setText("");
-                                                                                                  tutor_course_recycler.setAdapter(adapter);
-                                                                                              }
-                                                                                          }
+                                                                                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                                                                                    course_details details = data.getValue(course_details.class);
+                                                                                    System.out.println("rrrrrr");
+                                                                                    tutor_course_list.add(details);
+                                                                                    Adapter adapter = new Adapter();
+                                                                                    no.setText("");
+                                                                                    tutor_course_recycler.setAdapter(adapter);
+                                                                                }
+                                                                            }
 
-                                                                                          @Override
-                                                                                          public void onCancelled(DatabaseError databaseError) {
+                                                                            @Override
+                                                                            public void onCancelled(DatabaseError databaseError) {
 
-                                                                                          }
+                                                                            }
 
 
-
-                                                                                      }
+                                                                        }
         );
     }
-    public class view_holder extends RecyclerView.ViewHolder{
 
-        TextView course_id,course_name;
+    public class view_holder extends RecyclerView.ViewHolder {
+
+        TextView course_id, course_name;
         LinearLayout course_lay;
         ImageView course_img;
+
         public view_holder(View itemView) {
             super(itemView);
 
@@ -105,36 +98,35 @@ no=v.findViewById(R.id.nocourse);
         }
     }
 
-    public class Adapter extends RecyclerView.Adapter<view_holder>
-    {
+    public class Adapter extends RecyclerView.Adapter<view_holder> {
 
         @Override
         public view_holder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-            view_holder v = new view_holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.course_cell,parent , false ));
+            view_holder v = new view_holder(LayoutInflater.from(parent.getContext()).inflate(R.layout.course_cell, parent, false));
 
-            return v ;
+            return v;
         }
 
         @Override
         public void onBindViewHolder(view_holder holder, int position) {
 
 
-            final course_details data=tutor_course_list.get(position);
+            final course_details data = tutor_course_list.get(position);
             holder.course_name.setText(data.course_name);
             holder.course_id.setText(data.course_id);
             holder.course_lay.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    String courseid=data.course_id;
-                    String coursename=data.course_name;
-                    String courseduration=data.courseduration;
-                    String tutorname=data.tutorname;
-                    Intent i=new Intent(getActivity(),course_detail.class);
-                    i.putExtra("coursename",coursename);
-                    i.putExtra("courseid",courseid);
-                    i.putExtra("courseduration",courseduration);
-                    i.putExtra("coursetutor",tutorname);
+                    String courseid = data.course_id;
+                    String coursename = data.course_name;
+                    String courseduration = data.courseduration;
+                    String tutorname = data.tutorname;
+                    Intent i = new Intent(getActivity(), course_detail.class);
+                    i.putExtra("coursename", coursename);
+                    i.putExtra("courseid", courseid);
+                    i.putExtra("courseduration", courseduration);
+                    i.putExtra("coursetutor", tutorname);
                     startActivity(i);
                 }
             });

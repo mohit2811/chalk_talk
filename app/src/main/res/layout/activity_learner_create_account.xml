@@ -11,7 +11,7 @@
         android:background="@drawable/signup"
         android:orientation="vertical"
         android:padding="10dp"
-        tools:context="com.example.lenovo.chalk_talk.Create_account">
+        tools:context="com.example.lenovo.chalk_talk.learner_create_account">
 
         <TextView
             android:id="@+id/register"
@@ -167,7 +167,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/learner_cpassword_et"
             android:layout_centerInParent="true"
-            android:layout_marginTop="30sp"
+            android:layout_marginTop="20sp"
             android:background="#080e51"
             android:onClick="register"
             android:text="register"

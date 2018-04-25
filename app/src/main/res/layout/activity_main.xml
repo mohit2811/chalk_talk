@@ -7,9 +7,8 @@
     android:layout_height="match_parent"
     android:padding="30dp"
     android:gravity="center"
-    android:background="#acf0f4"
-    tools:context="com.example.lenovo.chalk_talk.MainActivity">
-<android.support.v4.widget.CircleImageView
+    android:background="#acf0f4">
+ <ImageView
     android:layout_width="100dp"
     android:layout_height="100dp"
     android:layout_marginTop="50sp"

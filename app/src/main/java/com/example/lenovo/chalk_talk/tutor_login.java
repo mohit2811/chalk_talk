@@ -30,8 +30,7 @@ public class tutor_login extends AppCompatActivity {
 
         String email= email_et.getText().toString();
 
-        if(Patterns.EMAIL_ADDRESS.matcher(email).matches())
-        {
+        if(Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
 
         }
         else{
@@ -66,6 +65,9 @@ public class tutor_login extends AppCompatActivity {
                 if(task.isSuccessful())
                 {
                     Toast.makeText(tutor_login.this,"done",Toast.LENGTH_SHORT).show();
+                    Intent i = new Intent(tutor_login.this,Tutor_home_page.class);
+                    startActivity(i);
+                    finish();
                 }
                 else
                 {
@@ -77,7 +79,7 @@ public class tutor_login extends AppCompatActivity {
         f_auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(listener);
     }
 
-    public void create_account(View view) {
+    public void create_account1(View view) {
         Intent i = new Intent(tutor_login.this,tutor_create_account.class);
         startActivity(i);
 
