@@ -71,7 +71,6 @@ public class learner_login extends AppCompatActivity {
                         Intent i = new Intent(learner_login.this, learner_home.class);
                         startActivity(i);
                         finish();
-
                     } else {
                         Toast.makeText(learner_login.this, "error try again", Toast.LENGTH_SHORT).show();
                     }

@@ -54,7 +54,7 @@ public class tutor_course extends android.support.v4.app.Fragment {
         String email = firebase.getCurrentUser().getEmail().replace(".", "");
         FirebaseDatabase data = FirebaseDatabase.getInstance();
         System.out.println("rrrr");
-        data.getReference().child(email).addListenerForSingleValueEvent(new ValueEventListener() {
+        data.getReference().child("course").child(email).addListenerForSingleValueEvent(new ValueEventListener() {
 
 
                                                                             @Override

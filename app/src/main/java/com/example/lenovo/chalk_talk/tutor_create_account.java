@@ -18,6 +18,8 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.internal.FirebaseAppHelper;
 
@@ -111,7 +113,7 @@ public class tutor_create_account extends AppCompatActivity {
         progress_bar.setMessage("Create account");
         progress_bar.show();
 
-        FirebaseAuth f_auth = FirebaseAuth.getInstance();
+        final FirebaseAuth f_auth = FirebaseAuth.getInstance();
 
         OnCompleteListener<AuthResult> listener = new OnCompleteListener<AuthResult>() {
             @Override
@@ -122,6 +124,9 @@ public class tutor_create_account extends AppCompatActivity {
 
                     Toast.makeText(tutor_create_account.this, "done", Toast.LENGTH_SHORT).show();
                     emailIds.replace(".","");
+                    FirebaseUser user = f_auth.getCurrentUser();
+                    UserProfileChangeRequest name = new UserProfileChangeRequest.Builder().setDisplayName(names).build();
+                    user.updateProfile(name);
                      createaccount data = new createaccount(names, dobs, qualifications, saddress, genders);
                      FirebaseDatabase database = FirebaseDatabase.getInstance();
                      String emaill=emailIds.replace(".","");

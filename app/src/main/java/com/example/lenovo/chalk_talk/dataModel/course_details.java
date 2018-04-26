@@ -5,20 +5,21 @@ package com.example.lenovo.chalk_talk.dataModel;
  */
 
 public class course_details {
-    public String course_name,course_id,courseduration,tutorname;
+    public String course_name,course_id,courseduration,tutorname,course_category;
 
     course_details()
     {
 
     }
 
-    public course_details(String course_name,String course_id,String courseduration,String tutorname)
+    public course_details(String course_name,String course_id,String courseduration,String tutorname,String course_category)
 
     {
         this.course_id = course_id;
         this.course_name = course_name;
         this.courseduration= courseduration;
         this.tutorname= tutorname;
+        this.course_category =course_category;
 
     }
 }

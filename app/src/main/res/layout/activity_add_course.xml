@@ -8,7 +8,14 @@
         android:orientation="vertical"
         android:padding="10dp"
         tools:context="com.example.lenovo.chalk_talk.add_course">
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
 
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
         <TextView
             android:id="@+id/add"
             android:layout_width="wrap_content"
@@ -58,6 +65,17 @@
             android:textColor="#222 "
             android:textColorHint="#000"
             android:textSize="15sp" />
+    <EditText
+        android:id="@+id/course_category_et"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/rounded_stroke"
+        android:hint="Enter Course category"
+        android:padding="10dp"
+        android:textColor="#222 "
+        android:textColorHint="#000"
+        android:textSize="15sp" />
 
        <LinearLayout
            android:layout_width="match_parent"
@@ -89,6 +107,7 @@
         android:layout_gravity="center_horizontal"
             android:layout_marginTop="30sp"
             android:padding="10dp"
+            android:id="@+id/add_btn"
             android:background="#080e51"
             android:onClick="add"
             android:text="Add Course"
@@ -101,7 +120,10 @@
         android:layout_marginTop="30sp"
         android:padding="10dp"
         android:background="#080e51"
-        android:onClick="add_vid"
+        android:id="@+id/vidd"
         android:text="Add video"
         android:textColor="#fff" />
     </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>

@@ -60,12 +60,13 @@ public class tutor_login extends AppCompatActivity {
         OnCompleteListener<AuthResult> listener=new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
-                progress_bar.hide();
+
 
                 if(task.isSuccessful())
                 {
                     Toast.makeText(tutor_login.this,"done",Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(tutor_login.this,Tutor_home_page.class);
+                    progress_bar.hide();
                     startActivity(i);
                     finish();
                 }

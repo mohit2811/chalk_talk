@@ -41,7 +41,6 @@ RecyclerView course_recycler;
 
     private void get_course_list(String course) {
         FirebaseAuth firebase = FirebaseAuth.getInstance();
-
         FirebaseDatabase data = FirebaseDatabase.getInstance();
         System.out.println("rrrr");
         data.getReference().child(course).addListenerForSingleValueEvent(new ValueEventListener() {
