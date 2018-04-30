@@ -45,31 +45,28 @@ RecyclerView course_recycler;
         System.out.println("rrrr");
         data.getReference().child(course).addListenerForSingleValueEvent(new ValueEventListener() {
 
+            @Override
 
-                                                                             @Override
-                                                                             public void onDataChange(DataSnapshot dataSnapshot) {
-                                                                                 course_list.clear();
-
-
-                                                                                 for (DataSnapshot data : dataSnapshot.getChildren()) {
-                                                                                     course_details details = data.getValue(course_details.class);
-                                                                                     System.out.println("rrrrrr");
-                                                                                     course_list.add(details);
-
-                                                                                     Adapter adapter = new Adapter();
-
-                                                                                     course_recycler.setAdapter(adapter);
-                                                                                 }
-                                                                             }
-
-                                                                             @Override
-                                                                             public void onCancelled(DatabaseError databaseError) {
-
-                                                                             }
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                course_list.clear();
 
 
+                for (DataSnapshot data : dataSnapshot.getChildren()) {
+                    course_details details = data.getValue(course_details.class);
+                    System.out.println("rrrrrr");
+                    course_list.add(details);
 
-                                                                         }
+                    Adapter adapter = new Adapter();
+
+                    course_recycler.setAdapter(adapter);
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        }
         );
     }
     public class view_holder extends RecyclerView.ViewHolder{

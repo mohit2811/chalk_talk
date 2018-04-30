@@ -3,8 +3,9 @@
     package="com.example.lenovo.chalk_talk">
 
     <uses-permission android:name="android.permission.INTERNET" />
-       <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -38,13 +39,14 @@
         <activity
             android:name=".learner_home"
             android:label="@string/title_activity_learner_home" />
-
         <activity android:name=".course_lists" />
         <activity android:name=".course_detail" />
-               <activity android:name=".tutor_course_details" />
+        <activity android:name=".tutor_course_details" />
         <activity android:name=".add_course" />
         <activity android:name=".course_vidd" />
-        <activity android:name=".book_course"></activity>
+        <activity android:name=".book_course" />
+        <activity android:name=".show_videos" />
+        <activity android:name=".Show_videos"></activity>
     </application>
 
 </manifest>

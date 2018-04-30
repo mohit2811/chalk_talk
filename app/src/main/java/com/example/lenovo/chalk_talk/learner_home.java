@@ -68,12 +68,17 @@ public class learner_home extends AppCompatActivity {
         mDrawerLayout.openDrawer(Gravity.LEFT);
     }
 
-    public void user_profile(View view) {
+    public void user_profile(View view)
+    {
+        Intent i =new Intent(learner_home.this,User_profile.class);
+        startActivity(i);
         mDrawerLayout.closeDrawer(Gravity.LEFT);
     }
 
-    public void home(View view) {
-
+    public void home(View view)
+    {
+        Intent i = new Intent(learner_home.this,learner_home.class);
+        startActivity(i);
         mDrawerLayout.closeDrawer(Gravity.LEFT);
 
     }
@@ -91,7 +96,9 @@ public class learner_home extends AppCompatActivity {
     }
 
     public void logout(View view) {
-
+        FirebaseAuth f_auth = FirebaseAuth.getInstance();
+        f_auth.signOut();
+        finish();
         startActivity(new Intent(this, learner_login.class));
     }
 

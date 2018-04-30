@@ -15,10 +15,12 @@ import com.example.lenovo.chalk_talk.dataModel.createaccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class add_course extends Fragment{
-    EditText course_name_et,course_id_et,course_category_et,course_duration_et ;
+public class add_course extends Fragment {
+    EditText course_name_et, course_id_et, course_category_et, course_duration_et;
 
-    Button add_btn,vidd;
+    Button add_btn, vidd;
+
+    String scourse_id_et;
 
 
     public add_course() {
@@ -38,28 +40,34 @@ public class add_course extends Fragment{
         course_id_et = v.findViewById(R.id.course_id_et);
         course_duration_et = v.findViewById(R.id.course_duration_et);
         course_category_et = v.findViewById(R.id.course_category_et);
-vidd.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        startActivity(new Intent(getActivity(),course_vidd.class));
-    }
-});
+        vidd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                Intent i = new Intent(getActivity(), course_vidd.class);
+
+                i.putExtra("course_id", scourse_id_et);
+
+                startActivity(i);
+            }
+        });
         add_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
                 String scourse_name_et = course_name_et.getText().toString();
-                String scourse_id_et = course_id_et.getText().toString();
+                scourse_id_et = course_id_et.getText().toString();
                 String scourse_duration_et = course_duration_et.getText().toString();
-                String scourse_category_et= course_category_et.getText().toString();
+                String scourse_category_et = course_category_et.getText().toString();
 
-                FirebaseAuth f =FirebaseAuth.getInstance();
-                String namet=f.getCurrentUser().getDisplayName();
-                System.out.print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4"+namet);
-                course_details data = new course_details(scourse_name_et,scourse_id_et,scourse_duration_et ,"mohit", scourse_category_et);
+                FirebaseAuth f = FirebaseAuth.getInstance();
+                String namet = f.getCurrentUser().getDisplayName();
+                System.out.print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4" + namet);
+                course_details data = new course_details(scourse_name_et, scourse_id_et, scourse_duration_et, "mohit", scourse_category_et);
                 FirebaseDatabase database = FirebaseDatabase.getInstance();
-                String emaill=f.getCurrentUser().getEmail().replace(".","");
-                database.getReference().child("course").child(scourse_category_et).child(emaill).setValue(data);
+                String emaill = f.getCurrentUser().getEmail().replace(".", "");
+
+                database.getReference().child("course").child(scourse_category_et).child(emaill).child(String.valueOf(scourse_id_et)).setValue(data);
             }
         });
 
@@ -67,4 +75,4 @@ vidd.setOnClickListener(new View.OnClickListener() {
         return v;
 
     }
-    }
+}

@@ -14,13 +14,17 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.lenovo.chalk_talk.dataModel.VideoUrl;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+
 
 public class course_vidd extends AppCompatActivity implements View.OnClickListener {
 
@@ -37,8 +41,7 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
     DatabaseReference mDatabaseReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_course_vidd);
 
@@ -72,7 +75,7 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
         Intent intent = new Intent();
         intent.setType("video/*");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent,"Select Video"),PICK_VIDEO_CODE);
+        startActivityForResult(Intent.createChooser(intent, "Select Video"), PICK_VIDEO_CODE);
 
     }
 
@@ -81,12 +84,10 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //when the user choses the file
-        if(resultCode==RESULT_CANCELED)
-        {
+        if (resultCode == RESULT_CANCELED) {
             // action cancelled
         }
-        if(resultCode==RESULT_OK)
-        {
+        if (resultCode == RESULT_OK) {
             uploadFile(data.getData());
         }
     }
@@ -101,7 +102,7 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
         // Create a storage reference from our app
         StorageReference storageRef = mStorageReference;
 
-        StorageReference riversRef = storageRef.child("files/"+data.getLastPathSegment());
+        StorageReference riversRef = storageRef.child("files/" + data.getLastPathSegment());
         UploadTask uploadTask = riversRef.putFile(data);
 
         // Register observers to listen for when the download is done or if it fails
@@ -117,22 +118,39 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                 // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
 
+                FirebaseAuth f =FirebaseAuth.getInstance();
+                String emaill=f.getCurrentUser().getEmail().replace(".","");
+
+                FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+                VideoUrl videoUrl = new VideoUrl(taskSnapshot.getDownloadUrl().toString());
+
+                database.getReference().child("video_urls").child(emaill).child(getIntent().getStringExtra("course_id")).setValue(videoUrl);
 
                 Toast.makeText(course_vidd.this, "Upload Success", Toast.LENGTH_SHORT).show();
                 finish();
+            }
+        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+            @SuppressWarnings("VisibleForTests")
+            @Override
+            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                textViewStatus.setText((int) progress + "% Uploading...");
             }
         });
 
 
     }
 
-    @Override
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.buttonUploadFile:
-                getVIDEO();
-                break;
 
+        @Override
+        public void onClick(View view) {
+            switch (view.getId()) {
+                case R.id.buttonUploadFile:
+                    getVIDEO();
+                    break;
+
+            }
         }
     }
-}
+
