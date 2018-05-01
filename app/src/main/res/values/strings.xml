@@ -1,4 +1,11 @@
 <resources>
+    <string-array name="course_array">
+    <item>Dance</item>
+    <item>Music</item>
+    <item>Computer Science</item>
+    <item>Technology</item>
+    <item>Other</item>
+    </string-array>
     <string name="app_name">Chalk_talk</string>
     <string name="title_activity_home_activity">Home_activity</string>
     <string name="title_home">Home</string>

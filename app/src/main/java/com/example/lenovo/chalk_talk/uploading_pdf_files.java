@@ -1,4 +1,6 @@
 package com.example.lenovo.chalk_talk;
+
+import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -16,7 +18,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -24,11 +25,10 @@ import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+public class uploading_pdf_files extends AppCompatActivity implements View.OnClickListener {
 
-public class course_vidd extends AppCompatActivity implements View.OnClickListener {
-
-
-    final static int PICK_VIDEO_CODE = 2342;
+    //this is the pic pdf code used in file chooser
+    final static int PICK_PDF_CODE = 2342;
 
     //these are the views
     TextView textViewStatus;
@@ -40,9 +40,11 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
     DatabaseReference mDatabaseReference;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_course_vidd);
+        setContentView(R.layout.activity_uploading_pdf_files);
+
 
         //getting firebase objects
         mStorageReference = FirebaseStorage.getInstance().getReference();
@@ -55,14 +57,15 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
 
         //attaching listeners to views
         findViewById(R.id.buttonUploadFile).setOnClickListener(this);
+
     }
 
     //this function will get the pdf from the storage
-    private void getVIDEO() {
+    private void getPDF() {
         //for greater than lolipop versions we need the permissions asked on runtime
         //so if the permission is not available user will go to the screen to allow storage permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M && ContextCompat.checkSelfPermission(this,
-                android.Manifest.permission.READ_EXTERNAL_STORAGE)
+                Manifest.permission.READ_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
             Intent intent = new Intent(Settings.ACTION_APPLICATION_DETAILS_SETTINGS,
                     Uri.parse("package:" + getPackageName()));
@@ -72,10 +75,9 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
 
         //creating an intent for file chooser
         Intent intent = new Intent();
-        intent.setType("video/*");
+        intent.setType("application/pdf");
         intent.setAction(Intent.ACTION_GET_CONTENT);
-        startActivityForResult(Intent.createChooser(intent, "Select Video"), PICK_VIDEO_CODE);
-
+        startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_PDF_CODE);
     }
 
 
@@ -83,11 +85,14 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         //when the user choses the file
-        if (resultCode == RESULT_CANCELED) {
-            // action cancelled
-        }
-        if (resultCode == RESULT_OK) {
-            uploadFile(data.getData());
+        if (requestCode == PICK_PDF_CODE && resultCode == RESULT_OK && data != null && data.getData() != null) {
+            //if a file is selected
+            if (data.getData() != null) {
+                //uploading the file
+                uploadFile(data.getData());
+            }else{
+                Toast.makeText(this, "No file chosen", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 
@@ -97,59 +102,43 @@ public class course_vidd extends AppCompatActivity implements View.OnClickListen
     //so we are not explaining it
     private void uploadFile(Uri data) {
         progressBar.setVisibility(View.VISIBLE);
+        StorageReference sRef = mStorageReference.child("pdf").child(System.currentTimeMillis() + ".pdf");
+        sRef.putFile(data)
+                .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                    @SuppressWarnings("VisibleForTests")
+                    @Override
+                    public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                        progressBar.setVisibility(View.GONE);
+                        textViewStatus.setText("File Uploaded Successfully");
 
-        // Create a storage reference from our app
-        StorageReference storageRef = mStorageReference;
-
-        StorageReference riversRef = storageRef.child("files/" + data.getLastPathSegment());
-        UploadTask uploadTask = riversRef.putFile(data);
-
-        // Register observers to listen for when the download is done or if it fails
-        uploadTask.addOnFailureListener(new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception exception) {
-                // Handle unsuccessful uploads
-
-                Toast.makeText(course_vidd.this, "Upload Failed", Toast.LENGTH_SHORT).show();
-            }
-        }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
-            @Override
-            public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                // taskSnapshot.getMetadata() contains file metadata such as size, content-type, and download URL.
-
-                FirebaseAuth f =FirebaseAuth.getInstance();
-                String emaill=f.getCurrentUser().getEmail().replace(".","");
-
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-
-                VideoUrl videoUrl = new VideoUrl(taskSnapshot.getDownloadUrl().toString());
-
-                database.getReference().child("video_urls").child(emaill).child(getIntent().getStringExtra("course_id")).setValue(videoUrl);
-
-                Toast.makeText(course_vidd.this, "Upload Success", Toast.LENGTH_SHORT).show();
-                finish();
-            }
-        }).addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
-            @SuppressWarnings("VisibleForTests")
-            @Override
-            public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
-                double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
-                textViewStatus.setText((int) progress + "% Uploading...");
-            }
-        });
-
+                        Upload upload = new Upload(editTextFilename.getText().toString(), taskSnapshot.getDownloadUrl().toString());
+                        mDatabaseReference.child("pdf_urls").child(String.valueOf(getIntent().getLongExtra("current_time",0))).setValue(upload);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception exception) {
+                        Toast.makeText(getApplicationContext(), exception.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+                .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                    @SuppressWarnings("VisibleForTests")
+                    @Override
+                    public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                        double progress = (100.0 * taskSnapshot.getBytesTransferred()) / taskSnapshot.getTotalByteCount();
+                        textViewStatus.setText((int) progress + "% Uploading...");
+                    }
+                });
 
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.buttonUploadFile:
+                getPDF();
+                break;
 
-        @Override
-        public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.buttonUploadFile:
-                    getVIDEO();
-                    break;
-
-            }
         }
     }
-
+}

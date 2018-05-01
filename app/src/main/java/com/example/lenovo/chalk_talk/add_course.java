@@ -7,22 +7,28 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 
 import com.example.lenovo.chalk_talk.dataModel.course_details;
 import com.example.lenovo.chalk_talk.dataModel.createaccount;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class add_course extends Fragment {
-    EditText course_name_et, course_id_et, course_category_et, course_duration_et;
+    EditText course_name_et, course_id_et, course_duration_et,tutor_name;
 
-    Button add_btn, vidd;
-
-    String scourse_id_et;
-
-
+    Button done;
+    RadioGroup radioGroup ;
+    RadioButton selected_radio_btn;
+    Spinner spinTest;
     public add_course() {
         // Required empty public constructor
     }
@@ -34,45 +40,108 @@ public class add_course extends Fragment {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.activity_add_course, container, false);
 
-        add_btn = v.findViewById(R.id.add_btn);
-        vidd = v.findViewById(R.id.vidd);
-        course_name_et = v.findViewById(R.id.course_name_et);
-        course_id_et = v.findViewById(R.id.course_id_et);
-        course_duration_et = v.findViewById(R.id.course_duration_et);
-        course_category_et = v.findViewById(R.id.course_category_et);
-        vidd.setOnClickListener(new View.OnClickListener() {
+        course_name_et = v.findViewById(R.id.course_name);
+        course_id_et = v.findViewById(R.id.cource_id);
+radioGroup= v.findViewById(R.id.select_materiial_type);
+        course_duration_et = v.findViewById(R.id. course_duration);
+ selected_radio_btn= v.findViewById(radioGroup.getCheckedRadioButtonId());
+        tutor_name = v.findViewById(R.id.tutor_name);
+        spinTest= (Spinner) v.findViewById(R.id.spintestAdd);
+        ArrayAdapter<String> adapter;
+        adapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_item, getResources()
+                .getStringArray(R.array.course_array));
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinTest.setAdapter(adapter);
+        get_tutor_name();
+        done.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent i = new Intent(getActivity(), course_vidd.class);
-
-                i.putExtra("course_id", scourse_id_et);
-
-                startActivity(i);
+                add_course_detail();
             }
         });
-        add_btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                String scourse_name_et = course_name_et.getText().toString();
-                scourse_id_et = course_id_et.getText().toString();
-                String scourse_duration_et = course_duration_et.getText().toString();
-                String scourse_category_et = course_category_et.getText().toString();
-
-                FirebaseAuth f = FirebaseAuth.getInstance();
-                String namet = f.getCurrentUser().getDisplayName();
-                System.out.print("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$4" + namet);
-                course_details data = new course_details(scourse_name_et, scourse_id_et, scourse_duration_et, "mohit", scourse_category_et);
-                FirebaseDatabase database = FirebaseDatabase.getInstance();
-                String emaill = f.getCurrentUser().getEmail().replace(".", "");
-
-                database.getReference().child("course").child(scourse_category_et).child(emaill).child(String.valueOf(scourse_id_et)).setValue(data);
-            }
-        });
-
-
         return v;
+    }
+
+    private void get_tutor_name()
+    {
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        String email =  auth.getCurrentUser().getEmail();
+
+        database.getReference().child("tutor").child(email.replace(".","")).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                tutor_name.setText( dataSnapshot.child("Tutor").getValue().toString() );
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
 
     }
-}
+
+    public void add_course_detail() {
+
+        String name = course_name_et.getText().toString();
+
+        String id = course_id_et.getText().toString();
+
+        String course_duration = course_duration_et.getText().toString();
+        String ss = spinTest.getSelectedItem().toString();
+        String type = selected_radio_btn.getText().toString();
+String t_name=tutor_name.getText().toString();
+        course_details data = new course_details(name , id , course_duration , type  , t_name,ss);
+
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+
+        FirebaseAuth auth = FirebaseAuth.getInstance();
+
+        String email = auth.getCurrentUser().getEmail();
+
+        long current_time = System.currentTimeMillis();
+
+        database.getReference().child("course").child(ss).child(email.replace(".","")).child(String.valueOf(current_time)).setValue(data);
+
+
+        if(type.equals("PDF"))
+        {
+            Intent i = new Intent(getActivity(),uploading_pdf_files.class);
+            i.putExtra("current_time" , current_time);
+            startActivity(i);
+        }
+
+        if(type.equals("IMAGE"))
+        {
+            Intent i = new Intent(getActivity(),uploading_images.class);
+            i.putExtra("current_time" , current_time);
+            startActivity(i);
+        }
+
+        if(type.equals("VIDEO"))
+        {
+            Intent i = new Intent(getActivity(),UploadVideoActivity.class);
+
+            i.putExtra("current_time" , current_time);
+
+            startActivity(i);
+
+        }
+
+
+
+
+
+
+
+    }
+
+
+
+    }
+
